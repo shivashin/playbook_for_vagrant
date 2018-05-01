@@ -1,0 +1,54 @@
+- name:  define ruby version
+  sudo: yes
+  set_fact:
+    workspace: /usr/local/src
+    ruby_version: 2.3.0
+    ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz
+
+- name: install packages required to build ruby
+  sudo: yes
+  apt: "name={{ item }} state=present"
+  with_items:
+    - build-essential
+    - zlib1g-dev
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
+    - libgdbm-dev
+    - libsqlite3-dev
+
+- name: download ruby
+  sudo: yes
+  get_url:
+    url: "{{ ruby_download_url }}"
+    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+
+- name: extract ruby
+  sudo: yes
+  unarchive:
+    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+    dest: "{{ workspace }}/"
+    copy: no
+
+- name: build ruby
+  sudo: yes
+  command: >
+    {{ item }}
+    chdir={{ workspace }}/ruby-{{ ruby_version }}
+    creates=/usr/local/bin/ruby
+  with_items:
+    - ./configure --disable-install-doc
+    - make
+    - make install
+    - gem update --system
+
+- name: install bundler gem
+  sudo: yes
+  gem:
+    name: bundler
+    user_install: no
+

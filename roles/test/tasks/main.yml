@@ -1,0 +1,27 @@
+- name: get file
+  sudo: yes
+  copy: src=/home/shivashin/reverse_expr dest=/home/vagrant/
+
+- name: get file
+  sudo: yes
+  copy: src=/home/shivashin/usually_expr dest=/home/vagrant/
+
+- name: install node.js
+  sudo: yes
+  apt: name=nodejs state=present
+
+- name: install tool
+  sudo: yes
+  apt: name=qt4-dev-tools state=present
+
+- name: install tool
+  sudo: yes
+  apt: name=libqt4-dev state=present
+
+- name: install tool
+  sudo: yes
+  apt: name=libqt4-core state=present
+
+- name: install tool
+  sudo: yes
+  apt: name=libqt4-gui state=present
