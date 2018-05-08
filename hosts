@@ -1,4 +1,4 @@
 [vagrants]
-127.0.0.1:2223
-#127.0.0.1:2224
-#127.0.0.1:2225
+127.0.0.1:2223 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+#127.0.0.1:2224 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+#127.0.0.1:2225 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
