@@ -1,0 +1,10 @@
+- name: get repository for java8
+  apt_repository:
+    repo: 'ppa:openjdk-r/ppa'
+
+- name: update
+  shell: apt-get update
+  sudo: yes
+
+- name: install java8
+  apt: name=openjdk8-jdk state=present

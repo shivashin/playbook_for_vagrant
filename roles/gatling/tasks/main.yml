@@ -1,0 +1,5 @@
+- name: download gatling file
+  get_url: url="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/2.2.3/gatling-charts-highcharts-bundle-2.2.3-bundle.zip" dest=~./
+
+- name: unzip gatling file
+  unarchive: src=~./gatling-charts-highcharts-bundle-2.2.3-bundle.zip dest=~./gatling
