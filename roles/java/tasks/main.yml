@@ -1,10 +1,11 @@
-- name: get repository for java8
-  apt_repository:
-    repo: 'ppa:openjdk-r/ppa'
+- name: Install add-apt-repostory
+  become: yes
+  apt: name=software-properties-common state=latest
 
-- name: update
-  shell: apt-get update
-  sudo: yes
+- name: Add java8 repository
+  become: yes
+  apt_repository: repo='ppa:webupd8team/java'
 
 - name: install java8
-  apt: name=openjdk8-jdk state=present
+  become: yes
+  apt: name=oracle-java8-installer state=present update_cache=yes

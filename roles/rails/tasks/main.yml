@@ -10,6 +10,7 @@
 - name: gem install rails -v 
   sudo: yes
   command: gem install rails --version="~> 5.0.1" 
+  ignore_errors: yes
   tags:
     - rails
     - install
