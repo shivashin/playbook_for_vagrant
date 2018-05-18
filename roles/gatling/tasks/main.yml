@@ -1,7 +1,7 @@
 - name: download gatling file
   become: yes
-  get_url: url="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/2.3.1/gatling-charts-highcharts-bundle-2.3.1-bundle.zip" dest=/home/vagrant/
+  get_url: url="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/2.3.1/gatling-charts-highcharts-bundle-2.3.1-bundle.zip" dest=/home/fw-auth/
 
 - name: unzip gatling file
   become: yes
-  unarchive: src="/home/vagrant/gatling-charts-highcharts-bundle-2.3.1-bundle.zip" dest="/home/vagrant/" remote_src=yes
+  unarchive: src="/home/vagrant/gatling-charts-highcharts-bundle-2.3.1-bundle.zip" dest="/home/fw-auth/" remote_src=yes
