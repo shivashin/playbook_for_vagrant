@@ -1,0 +1,7 @@
+- name: install ngx_mruby
+  become: yes
+  git:
+    repo: git://github.com/matsumoto-r/ngx_mruby.git
+    dest: ~/
+    remote: upstream
+    accept_hostkey: yes
