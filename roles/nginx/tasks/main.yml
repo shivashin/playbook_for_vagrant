@@ -1,3 +1,41 @@
-- name : Install nginx
+- name: install necessary tool libpcre3 
   become: yes
-  apt : name=nginx state=present
+  apt: name=libpcre3 state=present
+  
+- name: install necessary tool libpcre3-dev 
+  become: yes
+  apt: name=libpcre3-dev state=present
+  
+- name: install necessary tool zlib1g-dev 
+  become: yes
+  apt: name=zlib1g-dev state=present
+
+- name: get source nginx
+  become: yes
+  become_user: shivashin
+  get_url: url="http://nginx.org/download/nginx-1.13.12.tar.gz" dest="/home/shivashin/"
+
+- name: unzip file
+  become: yes
+  become_user: shivashin
+  unarchive: src="/home/shivashin/nginx-1.13.12.tar.gz" dest="/home/shivashin/" remote_src=yes
+
+- name: configure nginx
+  become: yes
+  become_user: shivashin
+  command: >
+    {{ item }}
+    chdir=/home/shivashin/nginx-1.13.12/
+  with_items:
+    - './configure --prefix=/usr/local/nginx/'
+
+- name: nginx make
+  become: yes
+  become_user: shivashin
+  make: chdir="/home/shivashin/nginx-1.13.12/"
+
+- name: nginx make install
+  become: yes
+  become_user: shivashin
+  make: chdir="/home/shivashin/nginx-1.13.12/"
+  target: install
