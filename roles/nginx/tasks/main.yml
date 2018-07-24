@@ -12,30 +12,22 @@
 
 - name: get source nginx
   become: yes
-  become_user: shivashin
-  get_url: url="http://nginx.org/download/nginx-1.13.12.tar.gz" dest="/home/shivashin/"
+  become_user: vagrant
+  get_url: url="http://nginx.org/download/nginx-1.13.12.tar.gz" dest="/home/vagrant/"
 
 - name: unzip file
   become: yes
-  become_user: shivashin
-  unarchive: src="/home/shivashin/nginx-1.13.12.tar.gz" dest="/home/shivashin/" remote_src=yes
+  become_user: vagrant
+  unarchive: src="/home/vagrant/nginx-1.13.12.tar.gz" dest="/home/vagrant/" remote_src=yes
 
 - name: configure nginx
   become: yes
-  become_user: shivashin
+  become_user: vagrant
   command: >
     {{ item }}
-    chdir=/home/shivashin/nginx-1.13.12/
+    chdir=/home/vagrant/nginx-1.13.12/
   with_items:
     - './configure --prefix=/usr/local/nginx/'
+    - 'make'
+    - 'sudo make install'
 
-- name: nginx make
-  become: yes
-  become_user: shivashin
-  make: chdir="/home/shivashin/nginx-1.13.12/"
-
-- name: nginx make install
-  become: yes
-  become_user: shivashin
-  make: chdir="/home/shivashin/nginx-1.13.12/"
-  target: install

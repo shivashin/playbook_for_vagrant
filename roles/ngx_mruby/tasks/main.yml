@@ -4,58 +4,70 @@
 
 - name: install necessary tool that is redis
   become: yes
-  become_user: shivashin
-  get_url: url="http://download.redis.io/releases/redis-2.8.18.tar.gz" dest="/home/shivashin/"
+  become_user: vagrant
+  get_url: url="http://download.redis.io/releases/redis-2.8.18.tar.gz" dest="/home/vagrant/"
 
 - name: unzip redis file
   become: yes
-  become_user: shivashin
-  unarchive: src="/home/shivashin/redis-2.8.18.tar.gz" dest="/home/shivashin/" remote_src=yes
+  become_user: vagrant
+  unarchive: src="/home/vagrant/redis-2.8.18.tar.gz" dest="/home/vagrant/" remote_src=yes
 
 - name: redis make
   become: yes
-  become_user: shivashin
-  make: chdir="/home/shivashin/redis-2.8.18/"
+  become_user: vagrant
+  make: chdir="/home/vagrant/redis-2.8.18/"
 
 - name: redis make install
   become: yes
-  become_user: shivashin
-  make: chdir="/home/shivashin/redis-2.8.18/"
+  become_user: vagrant
+  make: chdir="/home/vagrant/redis-2.8.18/"
   target: install
 
 - name: install hiredis
   become: yes
-  become_user: shivashin
+  become_user: vagrant
   git:
     repo: https://github.com/redis/hiredis.git
-    dest: /home/shivashin/hiredis
+    dest: /home/vagrant/hiredis
     remote: upstream
     
 - name: hiredis make
   become: yes
-  become_user: shivashin
-  make: chdir="/home/shivashin/hiredis/"
+  become_user: vagrant
+  make: chdir="/home/vagrant/hiredis/"
 
 - name: hiredis make install
   become: yes
-  become_user: shivashin
-  make: chdir="/home/shivashin/hiredis/"
+  become_user: vagrant
+  make: chdir="/home/vagrant/hiredis/"
   target: install
 
 - name: install ngx_mruby
   become: yes
-  become_user: shivashin
+  become_user: vagrant
   git:
     repo: git://github.com/matsumoto-r/ngx_mruby.git
-    dest: /home/shivashin/ngx_mruby
+    dest: /home/vagrant/ngx_mruby
     remote: upstream
   ignore_errors: yes
 
-- name: run script to build
+#- name: run script to build
+#  become: yes
+  # become_user: vagrant
+#  command: >
+#    {{ item }}
+#    chdir=/home/vagrant/ngx_mruby/
+#  with_items:
+#    - "sudo NGINX_CONFIG_OPT_ENV='--prefix=/usr/local/nginx' NGINX_SRC_ENV='/home/vagrant/nginx-1.13.12' sh build.sh"
+
+- name: make nginx add ngx_mruby
   become: yes
-  # become_user: shivashin
+  become_user: vagrant
   command: >
     {{ item }}
-    chdir=/home/shivashin/ngx_mruby/
+    chdir=/home/vagrant/nginx-1.13.12/
   with_items:
-    - "sudo NGINX_CONFIG_OPT_ENV='--prefix=/usr/local/nginx' NGINX_SRC_ENV='/home/shivashin/nginx-1.13.12' sh build.sh"
+    - 'sudo make clean'
+    - './configure --add-module=/home/vagrant/ngx_mruby --add-module=/home/vagrant/ngx_mruby/dependence/ngx_devel_kit --prefix=/usr/local/nginx/'
+    - 'make'
+    - 'sudo make install'
