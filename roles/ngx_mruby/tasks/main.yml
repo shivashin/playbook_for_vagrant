@@ -68,6 +68,6 @@
     chdir=/home/vagrant/nginx-1.13.12/
   with_items:
     - 'sudo make clean'
-    - './configure --add-module=/home/vagrant/ngx_mruby --add-module=/home/vagrant/ngx_mruby/dependence/ngx_devel_kit --prefix=/usr/local/nginx/'
+    - './configure --add-module=/home/vagrant/ngx_mruby --add-module=/home/vagrant/ngx_mruby/dependence/ngx_devel_kit --with-http_stub_status_module --prefix=/usr/local/nginx/'
     - 'make'
     - 'sudo make install'
