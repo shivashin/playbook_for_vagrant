@@ -1,0 +1,9 @@
+- name: Install dependency packages
+  become: yes
+  apt: name={{ item }} state=present
+  with_items: 
+    - lua5.1
+    - mysql-server
+    - libpcre3 
+    - libpcre3-dev 
+    - dnsmasq

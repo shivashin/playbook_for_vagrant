@@ -1,0 +1,4 @@
+ - hosts: ci
+   roles:
+     - httpfilter_ngx
+

@@ -1,0 +1,6 @@
+ - include: packages.yml
+ - include: luajit.yml
+ - include: luacjson.yml
+ - include: libdrizzle.yml
+ - include: getsource.yml
+ - include: build.yml

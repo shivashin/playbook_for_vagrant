@@ -1,0 +1,21 @@
+ - name: get source luacjson
+   become: yes
+   become_user: {{ user }}
+   get_url: url="https://www.kyne.com.au/~mark/software/download/lua-cjson-2.1.0.tar.gz" dest="/home/{{ user }}"
+
+ - name: unarchive file
+   become: yes
+   become_user: {{ user }}
+   unarchive:
+     src: /home/{{ user }}/lua-cjson-2.1.0.tar.gz
+     dest: /home/{{ user }}
+     remote_src: yes
+
+ - name: install luacjson
+   become: yes
+   become_user: {{ user }}
+   command: >
+     {{ item }}
+     chdir=/home/{{ user }}/lua-cjson-2.1.0
+   with_items:
+     - 'sudo make install'
