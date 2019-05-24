@@ -1,64 +1,59 @@
  - name: get source nginx
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="http://nginx.org/download/nginx-1.14.0.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
    unarchive:
-     src: /home/{{ user }}/nginx-1.14.0
+     src: /home/{{ user }}/nginx-1.14.0.tar.gz
      dest: /usr/local/src
      remote_src: yes
     
-     - name: get source lua-nginx-module
+ - name: get source lua-nginx-module
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="https://github.com/openresty/lua-nginx-module/archive/v0.10.12.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
    unarchive:
-     src: /home/{{ user }}/v0.10.12.tar.gz
+     src: /home/{{ user }}/lua-nginx-module-0.10.12.tar.gz
      dest: /usr/local/src
      remote_src: yes
 
  - name: get source ngx_devel_kit
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="https://github.com/simplresty/ngx_devel_kit/archive/v0.3.0.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
    unarchive:
-     src: /home/{{ user }}/v0.3.0.tar.gz
+     src: /home/{{ user }}/ngx_devel_kit-0.3.0.tar.gz
      dest: /usr/local/src
      remote_src: yes
     
-     - name: get source drizzle-nginx-module
+ - name: get source drizzle-nginx-module
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="https://github.com/openresty/drizzle-nginx-module/archive/v0.1.11.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
    unarchive:
-     src: /home/{{ user }}/v0.1.11.tar.gz
+     src: /home/{{ user }}/drizzle-nginx-module-0.1.11.tar.gz
      dest: /usr/local/src
      remote_src: yes
 
-     - name: get source rds-json-nginx-module
+ - name: get source rds-json-nginx-module
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="https://github.com/openresty/rds-json-nginx-module/archive/v0.15.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
    unarchive:
-     src: /home/{{ user }}/v0.15.tar.gz
+     src: /home/{{ user }}/rds-json-nginx-module-0.15.tar.gz
      dest: /usr/local/src
      remote_src: yes

@@ -1,11 +1,11 @@
  - name: get source libdrizzle
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="https://openresty.org/download/drizzle7-2011.07.21.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    unarchive:
      src: /home/{{ user }}/drizzle7-2011.07.21.tar.gz
      dest: /home/{{ user }}
@@ -13,11 +13,11 @@
 
  - name: install libdrizzle
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    command: >
      {{ item }}
      chdir=/home/{{ user }}/drizzle7-2011.07.21   
    with_items:
      - './configure --without-server'
-     - 'sudo make'
-     - 'sudo make install'
+     - 'sudo make libdrizzle-1.0'
+     - 'sudo make install-libdrizzle-1.0'

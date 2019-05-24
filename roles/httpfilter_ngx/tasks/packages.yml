@@ -1,9 +1,16 @@
-- name: Install dependency packages
-  become: yes
-  apt: name={{ item }} state=present
-  with_items: 
-    - lua5.1
-    - mysql-server
-    - libpcre3 
-    - libpcre3-dev 
-    - dnsmasq
+ - name: Install dependency packages
+   become: yes
+   apt: name={{ item }} state=present
+   with_items: 
+     - lua5.1
+     - mysql-server
+     - libpcre3 
+     - libpcre3-dev 
+     - dnsmasq
+
+ - name: clone repository ngx_httpfilter
+   become: yes
+   become_user: '{{ user }}'
+   git: >
+     repo=git@github.com:sai-lab/ngx_httpfilter.git
+     dest=/home/{{ user }}/ngx_httpfilter

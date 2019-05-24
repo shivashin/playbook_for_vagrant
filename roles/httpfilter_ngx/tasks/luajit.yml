@@ -1,11 +1,11 @@
  - name: get source luajit
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    get_url: url="http://luajit.org/download/LuaJIT-2.0.5.tar.gz" dest="/home/{{ user }}"
 
  - name: unarchive file
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    unarchive:
      src: /home/{{ user }}/LuaJIT-2.0.5.tar.gz
      dest: /home/{{ user }}
@@ -13,7 +13,7 @@
 
  - name: install luajit
    become: yes
-   become_user: {{ user }}
+   become_user: '{{ user }}'
    command: > 
      {{ item }}
      chdir=/home/{{ user }}/LuaJIT-2.0.5
